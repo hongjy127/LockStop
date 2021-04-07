@@ -3,7 +3,7 @@ from signal import pause
 import paho.mqtt.client as mqtt
 
 client = mqtt.Client()
-IP_ADDRESS = "172.30.1.39"  # pc
+IP_ADDRESS = "192.168.0.4"  # pc
 
 def publish(topic, value):
     try:
@@ -18,3 +18,8 @@ while(1):
     sleep(5)
     publish("iot/doorlock", "error")
     sleep(5)
+    publish("iot/CJ", "full")
+    sleep(5)
+    publish("iot/CJ", "empty")
+    sleep(5)
+

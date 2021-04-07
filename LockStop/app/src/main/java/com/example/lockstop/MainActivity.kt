@@ -1,9 +1,11 @@
 package com.example.lockstop
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mylib.Notification
 import com.example.mylib.net.Mqtt
 import kotlinx.android.synthetic.main.activity_main.*
@@ -60,25 +62,77 @@ class MainActivity : AppCompatActivity() {
 
     fun onReceived(topic: String, message: MqttMessage) {
         val msg = String(message.payload)
+
+
+
+//        val msg = "open"
 //        Log.i(TAG, "$topic: $msg")
 
-        if (topic == "iot/doorlock") {
-//            txtMqtt.text = "$topic: $msg"
-            val noti = Notification(this)
-            noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
-            val pendingIntent = noti.getPendingIntent(
-                    DoorLockActivity::class.java,
-                    NOTIFICATION_REQUEST)
-            if (msg == "open") {
-                noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
-                        "Alarm", "문열림",
-                        R.drawable.ic_launcher_foreground, pendingIntent)
-            } else {
-                noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
-                        "Alarm", "비밀번호 3회 오류",
-                        R.drawable.ic_launcher_foreground, pendingIntent)
+        when (topic) {
+            "iot/doorlock" -> {
+                val nextIntent = Intent(this, DoorLockActivity::class.java)
+                nextIntent.putExtra("message", msg)
+
+
+                val noti = Notification(this)
+                noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                val pendingIntent = noti.getPendingIntent(
+                        DoorLockActivity::class.java,
+                        NOTIFICATION_REQUEST)
+                when (msg) {
+                    "open" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "Alarm", "문열림",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                    "error" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "Alarm", "비밀번호 3회 오류",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                    else -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "error", "error",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                }
             }
-            
+            "iot/CJ" -> {
+                val nextIntent = Intent(this,CJActivity::class.java)
+                nextIntent.putExtra("message", msg)
+
+
+                val noti = Notification(this)
+                noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                val pendingIntent = noti.getPendingIntent(
+                        CJActivity::class.java,
+                        NOTIFICATION_REQUEST)
+                when (msg) {
+                    "full" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "Alarm", "택배 도착",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                    "empty" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "Alarm", "택배 수거",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                    else -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                            "error", "error",
+                            R.drawable.ic_launcher_foreground, pendingIntent)
+                }
+
+//        if (topic == "iot/doorlock") {
+////            txtMqtt.text = "$topic: $msg"
+//            val noti = Notification(this)
+//            noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+//            val pendingIntent = noti.getPendingIntent(
+//                    DoorLockActivity::class.java,
+//                    NOTIFICATION_REQUEST)
+//            when (msg){
+//                "open"->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+//                        "Alarm", "문열림",
+//                        R.drawable.ic_launcher_foreground, pendingIntent)
+//                "error"->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+//                        "Alarm", "비밀번호 3회 오류",
+//                        R.drawable.ic_launcher_foreground, pendingIntent)
+//                else->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+//                        "error", "error",
+//                        R.drawable.ic_launcher_foreground, pendingIntent)
+//            }
+
+            }
         }
     }
 }
