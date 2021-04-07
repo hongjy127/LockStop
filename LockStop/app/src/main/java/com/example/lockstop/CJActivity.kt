@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_c_j.*
 import kotlinx.android.synthetic.main.activity_c_j.btnAlarm
 import kotlinx.android.synthetic.main.activity_c_j.btnCall
 import kotlinx.android.synthetic.main.activity_c_j.btnOK
+import org.jetbrains.anko.startActivity
 
 
 class CJActivity : AppCompatActivity() {
@@ -25,6 +26,16 @@ class CJActivity : AppCompatActivity() {
             txtCJ.text = "택배 도착"
         } else {
             txtCJ.text = "택배 수거"
+        }
+
+        btnHome.setOnClickListener {
+            startActivity<MainActivity>(
+            )
+        }
+
+        btnDoor.setOnClickListener {
+            startActivity<DoorLockActivity>(
+            )
         }
 
         btnOK.setOnClickListener {

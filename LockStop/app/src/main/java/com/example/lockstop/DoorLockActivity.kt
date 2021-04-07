@@ -7,6 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_door_lock.*
+import kotlinx.android.synthetic.main.activity_door_lock.btnAlarm
+import kotlinx.android.synthetic.main.activity_door_lock.btnCall
+import kotlinx.android.synthetic.main.activity_door_lock.btnHome
+import kotlinx.android.synthetic.main.activity_door_lock.btnOK
+import org.jetbrains.anko.startActivity
 
 class DoorLockActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +26,16 @@ class DoorLockActivity : AppCompatActivity() {
             txtDoor.text = "문열림"
         } else {
             txtDoor.text = "비밀번호 3회 오류"
+        }
+
+        btnHome.setOnClickListener {
+            startActivity<MainActivity>(
+            )
+        }
+
+        btnCJ.setOnClickListener {
+            startActivity<CJActivity>(
+            )
         }
 
         btnOK.setOnClickListener {
