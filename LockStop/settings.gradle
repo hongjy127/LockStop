@@ -1,0 +1,3 @@
+include ':app', ':MyLib'
+rootProject.name = "LockStop"
+project(':MyLib').projectDir = new File('C:\\Users\\hongj\\TIL\\09. Android\\MyLibBase\\MyLib')
