@@ -31,6 +31,7 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnCall.setOnClickListener{
+            // 전화
             var uri = Uri.parse("smsto:" + "112")
             var intent = Intent(Intent.ACTION_SENDTO, uri)
             intent.putExtra("sms_body", "주거 침입")
