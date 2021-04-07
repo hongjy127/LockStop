@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_door_lock.*
 
@@ -12,7 +13,10 @@ class DoorLockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_door_lock)
 
-        var msg = "open"    // open, error 나중에 mqtt 받은거
+        val intent = getIntent()
+        var msg = intent.getStringExtra("message")
+        Log.i("mqtt_msg", "$msg")
+//        var msg = "open"    // open, error 나중에 mqtt 받은거
         if (msg == "open") {
             txtDoor.text = "문열림"
         } else {
