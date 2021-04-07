@@ -113,25 +113,6 @@ class MainActivity : AppCompatActivity() {
                             R.drawable.ic_launcher_foreground, pendingIntent)
                 }
 
-//        if (topic == "iot/doorlock") {
-////            txtMqtt.text = "$topic: $msg"
-//            val noti = Notification(this)
-//            noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
-//            val pendingIntent = noti.getPendingIntent(
-//                    DoorLockActivity::class.java,
-//                    NOTIFICATION_REQUEST)
-//            when (msg){
-//                "open"->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
-//                        "Alarm", "문열림",
-//                        R.drawable.ic_launcher_foreground, pendingIntent)
-//                "error"->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
-//                        "Alarm", "비밀번호 3회 오류",
-//                        R.drawable.ic_launcher_foreground, pendingIntent)
-//                else->noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
-//                        "error", "error",
-//                        R.drawable.ic_launcher_foreground, pendingIntent)
-//            }
-
             }
         }
     }
