@@ -59,8 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onReceived(topic: String, message: MqttMessage) {
-//        val msg = String(message.payload)
-        val msg = "open"
+        val msg = String(message.payload)
 //        Log.i(TAG, "$topic: $msg")
 
         if (topic == "iot/doorlock") {
