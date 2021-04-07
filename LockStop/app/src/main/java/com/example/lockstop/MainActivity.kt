@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         doorLockView.loadUrl("http://www.naver.com")
     }
 
-    fun onReceived(topic: String = "iot/doorlock", message: MqttMessage) {
+    fun onReceived(topic: String, message: MqttMessage) {
 //        val msg = String(message.payload)
         val msg = "open"
 //        Log.i(TAG, "$topic: $msg")
