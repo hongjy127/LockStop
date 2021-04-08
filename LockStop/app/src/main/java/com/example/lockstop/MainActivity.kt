@@ -11,8 +11,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
-const val SERVER_URI = "tcp://172.30.1.39:1883"  // PC
-
+//const val SERVER_URI = "tcp://172.30.1.39:1883"  // 정연PC
+const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
 
 class MainActivity : AppCompatActivity() {
 

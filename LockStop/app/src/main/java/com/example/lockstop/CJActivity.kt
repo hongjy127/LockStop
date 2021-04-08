@@ -6,18 +6,32 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.mylib.net.Mqtt
 import kotlinx.android.synthetic.main.activity_c_j.*
 import kotlinx.android.synthetic.main.activity_c_j.btnAlarm
 import kotlinx.android.synthetic.main.activity_c_j.btnCall
 import kotlinx.android.synthetic.main.activity_c_j.btnHome
 import kotlinx.android.synthetic.main.activity_c_j.btnOK
+import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.jetbrains.anko.startActivity
 
 
 class CJActivity : AppCompatActivity() {
+
+    lateinit var mqttClient: Mqtt
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_c_j)
+
+        mqttClient = Mqtt(this, SERVER_URI)
+        try {
+            mqttClient.setCallback(::onReceived)
+            Log.d("Mqtt", "connect")
+            mqttClient.connect(arrayOf<String>("iot/loadcell"))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         val intent = getIntent()
         var msg = intent.getStringExtra("message")
@@ -53,5 +67,9 @@ class CJActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+    fun onReceived(topic: String, message: MqttMessage) {
+        var msg = String(message.payload)
+        txtWight.text = "$msg"
     }
 }
