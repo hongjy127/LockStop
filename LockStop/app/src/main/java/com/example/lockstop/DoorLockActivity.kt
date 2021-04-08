@@ -21,12 +21,12 @@ class DoorLockActivity : AppCompatActivity() {
 
         val intent = getIntent()
         var msg = intent.getStringExtra("message")
-        Log.i("mqtt_msg", "$msg")
-//        var msg = "open"    // open, error 나중에 mqtt 받은거
-        if (msg == "open") {
-            txtDoor.text = "문열림"
-        } else {
-            txtDoor.text = "비밀번호 3회 오류"
+//        Log.i("mqtt_msg", "$msg")
+
+
+        when(msg) {
+            "open" -> txtDoor.text = "문열림"
+            "error" -> txtDoor.text = "비밀번호 3회 오류"
         }
 
         btnHome.setOnClickListener {
@@ -40,8 +40,6 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnOK.setOnClickListener {
-//            startActivity<MainActivity>(
-//            )
             Toast.makeText(application, "확인 되었습니다.", Toast.LENGTH_LONG).show()
         }
 
@@ -51,12 +49,8 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnCall.setOnClickListener{
-            // 전화
-//            var uri = Uri.parse("smsto:" + "010-0000-0000")
-//            var intent = Intent(Intent.ACTION_SENDTO, uri)
             var uri = Uri.parse("tel:010-0000-0000")
             var intent = Intent(Intent.ACTION_DIAL, uri)
-//            intent.putExtra("sms_body", "주거 침입")
             startActivity(intent)
         }
         

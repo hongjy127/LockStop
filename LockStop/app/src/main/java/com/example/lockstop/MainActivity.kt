@@ -1,7 +1,5 @@
 package com.example.lockstop
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebViewClient
@@ -13,12 +11,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
-const val SERVER_URI = "tcp://192.168.0.4:1883"  // PC
+const val SERVER_URI = "tcp://172.30.1.39:1883"  // PC
 
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG = "MqttActivity"
     lateinit var mqttClient: Mqtt
 
     companion object {
@@ -59,28 +56,23 @@ class MainActivity : AppCompatActivity() {
             webViewClient = WebViewClient()
         }
 
-        // mjpeg-streamer 실행
         doorLockView.loadUrl("http://www.naver.com")
     }
 
     fun onReceived(topic: String, message: MqttMessage) {
         var msg = String(message.payload)
 
-
-//        val msg = "open"
-//        Log.i(TAG, "$topic: $msg")
+//        Log.i("mqtt_main", "$topic: $msg")
 
         when (topic) {
             "iot/doorlock" -> {
-                val nextIntent = Intent(this, DoorLockActivity::class.java)
-                nextIntent.putExtra("message", msg)
-//                startActivity(nextIntent)
-
                 val noti = Notification(this)
                 noti.createNotificationChannel(CHANNEL_ID1, CHANNEL_NAME, CHANNEL_DESCRIPTION)
                 val pendingIntent = noti.getPendingIntent(
                         DoorLockActivity::class.java,
-                        NOTIFICATION_REQUEST)
+                        NOTIFICATION_REQUEST,
+                        msg)
+
                 when (msg) {
                     "open" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "Alarm", "문열림",
@@ -94,16 +86,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             "iot/CJ" -> {
-                val nextIntent = Intent(this,CJActivity::class.java)
-                nextIntent.putExtra("message", msg)
-//                startActivity(nextIntent)
-
-
                 val noti = Notification(this)
                 noti.createNotificationChannel(CHANNEL_ID2, CHANNEL_NAME, CHANNEL_DESCRIPTION)
                 val pendingIntent = noti.getPendingIntent(
                         CJActivity::class.java,
-                        NOTIFICATION_REQUEST)
+                        NOTIFICATION_REQUEST,
+                        msg)
                 when (msg) {
                     "full" -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
                             "Alarm", "택배 도착",
