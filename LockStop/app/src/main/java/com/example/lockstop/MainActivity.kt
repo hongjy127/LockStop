@@ -13,7 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
-const val SERVER_URI = "tcp://172.30.1.39:1883"
+const val SERVER_URI = "tcp://192.168.0.4:1883"  // PC
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,11 +22,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var mqttClient: Mqtt
 
     companion object {
-        const val CHANNEL_ID = "com.example.lockstop"
+        const val CHANNEL_ID1 = "com.example.lockstop1"
+        const val CHANNEL_ID2 = "com.example.lockstop2"
         const val CHANNEL_NAME = "My Channel"
         const val CHANNEL_DESCRIPTION = "Channel Test"
         const val NOTIFICATION_REQUEST = 0
-        const val NOTIFICATION_ID = 100
+        const val NOTIFICATION_ID1 = 100
+        const val NOTIFICATION_ID2 = 200
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,21 +74,21 @@ class MainActivity : AppCompatActivity() {
             "iot/doorlock" -> {
                 val nextIntent = Intent(this, DoorLockActivity::class.java)
                 nextIntent.putExtra("message", msg)
-                startActivity(nextIntent)
+//                startActivity(nextIntent)
 
                 val noti = Notification(this)
-                noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                noti.createNotificationChannel(CHANNEL_ID1, CHANNEL_NAME, CHANNEL_DESCRIPTION)
                 val pendingIntent = noti.getPendingIntent(
                         DoorLockActivity::class.java,
                         NOTIFICATION_REQUEST)
                 when (msg) {
-                    "open" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    "open" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "Alarm", "문열림",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    "error" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    "error" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "Alarm", "비밀번호 3회 오류",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    else -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    else -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "error", "error",
                             R.drawable.ic_launcher_foreground, pendingIntent)
                 }
@@ -94,22 +96,22 @@ class MainActivity : AppCompatActivity() {
             "iot/CJ" -> {
                 val nextIntent = Intent(this,CJActivity::class.java)
                 nextIntent.putExtra("message", msg)
-                startActivity(nextIntent)
+//                startActivity(nextIntent)
 
 
                 val noti = Notification(this)
-                noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                noti.createNotificationChannel(CHANNEL_ID2, CHANNEL_NAME, CHANNEL_DESCRIPTION)
                 val pendingIntent = noti.getPendingIntent(
                         CJActivity::class.java,
                         NOTIFICATION_REQUEST)
                 when (msg) {
-                    "full" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    "full" -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
                             "Alarm", "택배 도착",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    "empty" -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    "empty" -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
                             "Alarm", "택배 수거",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    else -> noti.notifyBasic(CHANNEL_ID, NOTIFICATION_ID,
+                    else -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
                             "error", "error",
                             R.drawable.ic_launcher_foreground, pendingIntent)
                 }
