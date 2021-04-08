@@ -18,6 +18,7 @@ class DoorLockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_door_lock)
 
+
         val intent = getIntent()
         var msg = intent.getStringExtra("message")
         Log.i("mqtt_msg", "$msg")
@@ -51,9 +52,11 @@ class DoorLockActivity : AppCompatActivity() {
 
         btnCall.setOnClickListener{
             // 전화
-            var uri = Uri.parse("smsto:" + "010-0000-0000")
-            var intent = Intent(Intent.ACTION_SENDTO, uri)
-            intent.putExtra("sms_body", "주거 침입")
+//            var uri = Uri.parse("smsto:" + "010-0000-0000")
+//            var intent = Intent(Intent.ACTION_SENDTO, uri)
+            var uri = Uri.parse("tel:010-0000-0000")
+            var intent = Intent(Intent.ACTION_DIAL, uri)
+//            intent.putExtra("sms_body", "주거 침입")
             startActivity(intent)
         }
         

@@ -22,7 +22,7 @@ class CJActivity : AppCompatActivity() {
         var msg = intent.getStringExtra("message")
         Log.i("mqtt_msg", "$msg")
 //        var msg = "open"    // open, error 나중에 mqtt 받은거
-        if (msg == "open") {
+        if (msg == "full") {
             txtCJ.text = "택배 도착"
         } else {
             txtCJ.text = "택배 수거"

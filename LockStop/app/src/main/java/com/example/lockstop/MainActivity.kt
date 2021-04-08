@@ -15,6 +15,7 @@ import org.jetbrains.anko.startActivity
 const val SUB_TOPIC = "iot/#"
 const val SERVER_URI = "tcp://172.30.1.39:1883"
 
+
 class MainActivity : AppCompatActivity() {
 
     val TAG = "MqttActivity"
@@ -61,8 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onReceived(topic: String, message: MqttMessage) {
-        val msg = String(message.payload)
-
+        var msg = String(message.payload)
 
 
 //        val msg = "open"
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             "iot/doorlock" -> {
                 val nextIntent = Intent(this, DoorLockActivity::class.java)
                 nextIntent.putExtra("message", msg)
-
+                startActivity(nextIntent)
 
                 val noti = Notification(this)
                 noti.createNotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             "iot/CJ" -> {
                 val nextIntent = Intent(this,CJActivity::class.java)
                 nextIntent.putExtra("message", msg)
+                startActivity(nextIntent)
 
 
                 val noti = Notification(this)
