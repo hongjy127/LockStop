@@ -40,7 +40,7 @@ def video_streaming():
                 stream.seek(0)      # 파일 쓰기 위치를 맨 앞으로 이동
                 stream.truncate()   # 기존 내용을 버리는 작업
 
-                if not botton.value:
+                if not button.value:
                     writer.write(struct.pack('<L', 0))  # 스트리밍 끝
                     writer.flush()
                     break
@@ -54,8 +54,7 @@ def start_record():
 def stop_record():
     camera.stop_recording()
 
-while True:
-    if button.is_pressed:
-        start_record()
-    else:
-        stop_record()
+button.when_pressed=start_record
+button.when_released=stop_record
+
+pause()
