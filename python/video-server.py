@@ -5,20 +5,23 @@ import numpy as np
 import datetime
 import sys
 
-HOST = '172.30.1.39'    # 내 pc의 주소
+HOST = '192.168.0.4'    # 내 pc의 주소
 PORT = 5000
 counter = 0
+
+# data = None     // jpg 이미지
 
 def show_image(data, frame_name):
     # byte 배열을 numpy로 변환
     data = np.frombuffer(data, dtype=np.uint8)
     image = cv2.imdecode(data, cv2.IMREAD_COLOR)
     # Video.show()
-    cv2.imshow(frame_name, image)   # 스레드별로 frame이름이 달라야함
+    # cv2.imshow(frame_name, image)   # 스레드별로 frame이름이 달라야함
     key = cv2.waitKey(1)  # 이미지 갱신이 일어나는 곳
     return (image, key)
 
 def receiver(client, addr):
+    # global counter, data
     global counter
     counter += 1
     frame_name = f'frame {counter}'
@@ -46,7 +49,7 @@ def receiver(client, addr):
             now = datetime.datetime.now()
             fname = now.strftime("%y%m%d%H%M%S") + ".jpeg"
             # fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-            filename = "C:/Users/hongj/LockStop/python/image/"+fname
+            filename = "C:/Users/wjdgo/iot_project/LockStop/python/image"+fname
             # print(filename)
             # print('capture')
             cv2.imwrite(filename, image)

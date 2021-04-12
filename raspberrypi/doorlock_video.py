@@ -16,10 +16,10 @@ import io
 import net
 import cv2
 
-HOST = '172.30.1.39'
+HOST = '192.168.0.4'
 PORT = 5000
 
-button = Button(21)
+button = Button(20)
 
 camera = picamera.PiCamera()
 camera.resolution = (640, 480)
@@ -69,7 +69,7 @@ def stop_record():
 #     print("press button")
     
 
-while(1):
-    start_record()
-    # button.when_pressed=send_message
-    # pause()
+# while(1):
+start_record()
+# button.when_pressed=send_message
+pause()
