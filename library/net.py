@@ -20,15 +20,15 @@ def send(writer ,data, save=0):
     writer.flush()
 
 def receive(reader):
-    data = reader.read(struct.calcsize('<L'))
+    data_len = reader.read(struct.calcsize('<L'))
+    data_len = struct.unpack('<L', data_len)[0]
     save = reader.read(struct.calcsize('<L'))
-    data_len = struct.unpack('<L', data)[0]
+    save = struct.unpack('<L', save)[0]
 
     if not data_len:
         return (None, 0)
     data = reader.read(data_len)
 
     return (data, data_len, save)
-    
 
         

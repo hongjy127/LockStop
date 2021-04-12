@@ -14,6 +14,7 @@ import struct
 import threading
 import io
 import net
+import cv2
 
 HOST = '172.30.1.39'
 PORT = 5000
@@ -26,6 +27,7 @@ camera.vflip = True
 
 def video_streaming():
     save = 0
+    key = cv2.waitKey(1)
     with socket.socket() as s:
         s.connect((HOST, PORT))
         writer = s.makefile('wb')
@@ -34,30 +36,30 @@ def video_streaming():
 
         # 동영상 -> 이미지
         for _ in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
-                image = stream.getvalue()   # 스트림에서 byte 배열 얻기
-                if button.is_pressed:
-                    save = 1
-                    print(save)
-                else:
-                    save = 0
-                    print(save)
-                
-                net.send(writer, image, save)
-                result = net.receive(reader)[0]
+            image = stream.getvalue()   # 스트림에서 byte 배열 얻기
+            if button.is_pressed:
+                save = 1
+                # print(save)
+            else:
+                save = 0
+                # print(save)
+            
+            net.send(writer, image, save)
+            # result = net.receive(reader)[0]
 
-                # 다음 캡쳐를 위해 스트림을 리셋 - 파일의 기존 내용을 버림
-                stream.seek(0)      # 파일 쓰기 위치를 맨 앞으로 이동
-                stream.truncate()   # 기존 내용을 버리는 작업
+            # 다음 캡쳐를 위해 스트림을 리셋 - 파일의 기존 내용을 버림
+            stream.seek(0)      # 파일 쓰기 위치를 맨 앞으로 이동
+            stream.truncate()   # 기존 내용을 버리는 작업
 
-                # if not button.value:
-                #     writer.write(struct.pack('<L', 0))  # 스트리밍 끝
-                #     writer.flush()
-                #     break
+            if key == 27:
+                writer.write(struct.pack('<L', 0))  # 스트리밍 끝
+                writer.flush()
+                break
 
 def start_record():
-    now = datetime.datetime.now()
-    fname = now.strftime("%T%m%d_%H%M") + ".h264"
-    camera.start_recording(fname)
+    # now = datetime.datetime.now()
+    # fname = now.strftime("%T%m%d_%H%M") + ".h264"
+    # camera.start_recording(fname)
     threading.Thread(target=video_streaming).start()
 
 def stop_record():

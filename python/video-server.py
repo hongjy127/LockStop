@@ -3,6 +3,7 @@ import json
 import cv2
 import numpy as np
 import datetime
+import sys
 
 HOST = '172.30.1.39'    # 내 pc의 주소
 PORT = 5000
@@ -28,10 +29,14 @@ def receiver(client, addr):
 
     while True:
         data, data_len, save = net.receive(reader)
+        # print(sys.getsizeof(data))
+        # print(data_len)
+        # print(save)
         if not data:
             break
         # data : jpeg 이미지
         image, key = show_image(data, frame_name)
+        # print(image.shape)
         # image : bgr 이미지
         # out.write(image)
         # print('received ', data_len)    # 이미지 처리
