@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.mylib.net.Mqtt
+import com.example.mylib.openapi.piapi.PiApi
 import kotlinx.android.synthetic.main.activity_c_j.*
 import kotlinx.android.synthetic.main.activity_c_j.btnAlarm
 import kotlinx.android.synthetic.main.activity_c_j.btnCall
@@ -57,8 +58,10 @@ class CJActivity : AppCompatActivity() {
         }
 
         btnAlarm.setOnClickListener{
-            // PiApi 연동 - 라즈베리파이로 경보음 울리기
             Toast.makeText(application, "경보음이 울립니다.", Toast.LENGTH_LONG).show()
+            PiApi.controlBuzzer("1", "on") {
+
+            }
         }
 
         btnCall.setOnClickListener{

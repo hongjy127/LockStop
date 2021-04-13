@@ -11,8 +11,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
-//const val SERVER_URI = "tcp://172.30.1.39:1883"  // 정연PC
-const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
+// 주소
+const val SERVER_URI = "tcp://172.30.1.39:1883"  // 정연PC
+// const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
+// const val SERVER_URI = "tcp://192.168.0.36:1883"  // 태석PC
+// const val SERVER_URI = "tcp://172.30.1.43:1883"  // 현수PC
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,9 +59,14 @@ class MainActivity : AppCompatActivity() {
             webViewClient = WebViewClient()
         }
 
+        // 주소
         doorLockView.loadUrl("http://172.30.1.57:8000/mjpeg/?mode=stream")
     }
 
+    override fun onPause() {
+        super.onPause()
+        doorLockView.loadUrl("about:blank")
+    }
     fun onReceived(topic: String, message: MqttMessage) {
         var msg = String(message.payload)
 

@@ -1,11 +1,14 @@
 package com.example.lockstop
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.mylib.openapi.piapi.PiApi
 import kotlinx.android.synthetic.main.activity_door_lock.*
 import kotlinx.android.synthetic.main.activity_door_lock.btnAlarm
 import kotlinx.android.synthetic.main.activity_door_lock.btnCall
@@ -17,7 +20,6 @@ class DoorLockActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_door_lock)
-
 
         val intent = getIntent()
         var msg = intent.getStringExtra("message")
@@ -44,8 +46,11 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnAlarm.setOnClickListener{
-            // PiApi 연동 - 라즈베리파이로 경보음 울리기
-            Toast.makeText(application, "경보음이 울립니다.", Toast.LENGTH_LONG).show()
+            PiApi.controlBuzzer("1", "on") {
+//                if(it.result == "OK") {
+//                    Toast.makeText(application, "경보음이 울립니다.", Toast.LENGTH_LONG).show()
+//                }
+            }
         }
 
         btnCall.setOnClickListener{
