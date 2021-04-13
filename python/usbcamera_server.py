@@ -8,6 +8,7 @@ import sys
 # 주소
 HOST = '192.168.0.4'    # 내 pc의 주소
 # HOST = '172.30.1.39'
+# HOST = '192.168.0.36' # 태석pc
 PORT = 5000
 counter = 0
 

@@ -17,6 +17,7 @@ import net
 import cv2
 
 HOST = '192.168.0.4'
+#HOST = '192.168.0.36' #태석pc
 PORT = 5000
 
 button = Button(20)
