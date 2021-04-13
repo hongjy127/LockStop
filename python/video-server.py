@@ -14,7 +14,7 @@ def show_image(data, frame_name):
     data = np.frombuffer(data, dtype=np.uint8)
     image = cv2.imdecode(data, cv2.IMREAD_COLOR)
     # Video.show()
-    cv2.imshow(frame_name, image)   # 스레드별로 frame이름이 달라야함
+    # cv2.imshow(frame_name, image)   # 스레드별로 frame이름이 달라야함
     key = cv2.waitKey(1)  # 이미지 갱신이 일어나는 곳
     return (image, key)
 

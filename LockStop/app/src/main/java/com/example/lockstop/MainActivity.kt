@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             webViewClient = WebViewClient()
         }
 
-        doorLockView.loadUrl("http://www.naver.com")
+        doorLockView.loadUrl("http://172.30.1.57:8000/mjpeg/?mode=stream")
     }
 
     fun onReceived(topic: String, message: MqttMessage) {
