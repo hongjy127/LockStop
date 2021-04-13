@@ -1,5 +1,4 @@
 from time import sleep
-from signal import pause
 import paho.mqtt.client as mqtt
 
 client = mqtt.Client()

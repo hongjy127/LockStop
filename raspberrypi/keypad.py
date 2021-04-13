@@ -2,8 +2,9 @@ import RPi.GPIO as GPIO
 import time
 from gpiozero import Buzzer
 import pigpio
-import signal
+import paho.mqtt.client as mqtt
 
+client = mqtt.Client()
 GPIO.setwarnings(False)
 
 bz = Buzzer(16)
@@ -11,6 +12,21 @@ SERVO = 24
 
 pi = pigpio.pi()
 pi.set_servo_pulsewidth(SERVO,700) # 초기 0도
+
+# 주소
+# IP_ADDRESS = "172.30.1.39"  # 정연 pc
+IP_ADDRESS = "192.168.0.4"  # 해준 pc
+#IP_ADDRESS = "192.168.0.36"  # 태석 pc
+# cmd로 sub 확인
+# mosquitto_sub -v -h localhost -t iot/#
+def publish(topic, value):
+    try:
+        client.connect(IP_ADDRESS)
+        client.publish(topic, value)
+        client.loop(2)
+        print(topic, value)
+    except Exception as e:
+        print(f"에러 {e}")
 
 class Keypad:
     #키패드의 행과 열의 핀번호를 리스트로 전달하여 초기화 할 수 있다.
@@ -90,21 +106,7 @@ if __name__ == '__main__':
     PASSWORD = "1234"
     confirm = ""
     b_press = False
-    
-    # seq = ""
-    # while(True):
-    #     digit = None
-    #     while digit == None:
-    #         digit = kp.getKey()
-    #         if digit != None:
-    #             bz.beep(0.1,n=1)
-    #     if(digit == "*"):
-    #         break
-    #     print(digit)
-    #     seq += str(digit)
-    #     print(seq)
-    #     time.sleep(0.5)
-
+    counter = 0
 
     while(True):
         key = kp.getKey()
@@ -129,31 +131,21 @@ if __name__ == '__main__':
                     PASSWORD = confirm[1:]
                     print("new password", PASSWORD)
                 elif(confirm == PASSWORD):
+                    counter=0
                     print("right")
+                    publish("iot/doorlock", "open")
                     pi.set_servo_pulsewidth(SERVO,1500) # 90도
                     time.sleep(3)
                     pi.set_servo_pulsewidth(SERVO,700) # 0도
                 else:
                     print("wrong")
                     bz.beep(2,n=1)
+                    counter += 1
+                    publish("iot/doorlock", "error1") # <-하이디에서 받는거
+                    if (counter == 3):
+                        counter=0
+                        publish("iot/doorlock", "error") # <- 안드로이드 알림 받는거
+
+                time.sleep(0.3)
                 confirm = ""
                 b_press = False
-        
-        #time.sleep(0.2)
-            
-    # for i in (0,len(PASSWORD)):
-    #     key = None
-    #     while key == None:
-    #         key = kp.getKey()
-    #         if (key != None):
-    #             print(key)
-        
-    #     seq += str(key)
-    #     time.sleep(1)
-
-    # print(seq)
-
-    # if seq == PASSWORD:
-    #     print('right')
-    # else:
-    #     print('wrong')
