@@ -4,7 +4,7 @@ from gpiozero import Buzzer
 # import pigpio
 import time
 
-buzzer = Buzzer(20)
+buzzer = Buzzer(16)
 
 def buzzercontrol(request):
     # target = request.GET["target"]    # 키가 없으면 예외 발생

@@ -11,11 +11,13 @@ import net
 import io
 import cv2
 
-# 주소
-HOST = '172.30.1.39'
+# PC ip주소
+# HOST = '172.30.1.39'
+HOST = '192.168.0.4'
+
 PORT = 5000
 
-button = Button(21)
+button = Button(20)
 
 if __name__ == '__main__':
     save = 0

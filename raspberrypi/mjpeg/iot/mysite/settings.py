@@ -20,14 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tj56pru=l8dxu5cjc1i59ked^=@1aj91&4!p580vd%@)u&$ti='
+# SECRET_KEY = 'tj56pru=l8dxu5cjc1i59ked^=@1aj91&4!p580vd%@)u&$ti=' # 정연
+SECRET_KEY = 's(!4(brhd%0s)l#ba)=r935ttt+*+vk4=t6gsr10@yy3w$1v*-'  # 해준
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 # 외부에서 허용 가능
 # 바꾸기
-ALLOWED_HOSTS = ['hongpi', '127.0.0.1', 'localhost', '172.30.1.57']
+# ALLOWED_HOSTS = ['hongpi', '127.0.0.1', 'localhost', '172.30.1.57']
+ALLOWED_HOSTS = ['haejunpi','127.0.0.1','localhost','192.168.0.34','192.168.0.4']
 
 
 # Application definition

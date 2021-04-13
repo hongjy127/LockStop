@@ -8,7 +8,7 @@
 
 ```
 // 경로에서(mjpeg)
-$ python managy.py runserver 0.0.0.0:8000
+$ python manage.py runserver 0.0.0.0:8000
 ```
 
 - noti_test_pub.py (마그네틱 센서, 도어락 임시)

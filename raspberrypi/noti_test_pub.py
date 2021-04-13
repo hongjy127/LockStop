@@ -4,7 +4,8 @@ import paho.mqtt.client as mqtt
 
 client = mqtt.Client()
 # 주소
-IP_ADDRESS = "172.30.1.39"  # pc
+# IP_ADDRESS = "172.30.1.39"  # 정연 pc
+IP_ADDRESS = "192.168.0.4"  # 해준 pc
 # cmd로 sub 확인
 # mosquitto_sub -v -h localhost -t iot/#
 def publish(topic, value):
