@@ -12,8 +12,9 @@ import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
 // 주소
+const val SERVER_URI = "tcp://172.30.1.18:1883"  // 정연PC
 //const val SERVER_URI = "tcp://172.30.1.39:1883"  // 정연PC
- const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
+// const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
 // const val SERVER_URI = "tcp://192.168.0.36:1883"  // 태석PC
 // const val SERVER_URI = "tcp://172.30.1.43:1883"  // 현수PC
 
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         // 주소
 //        doorLockView.loadUrl("http://172.30.1.57:8000/mjpeg/?mode=stream")
-        doorLockView.loadUrl("http://192.168.0.4:8000/mjpeg/?mode=stream")
+        doorLockView.loadUrl("http://172.30.1.42:8000/mjpeg/?mode=stream")
     }
 
     override fun onPause() {

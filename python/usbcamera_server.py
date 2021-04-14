@@ -3,15 +3,18 @@ import json
 import cv2
 import numpy as np
 import datetime
-import sys
+import os
 
 # 주소
-HOST = '192.168.0.4'    # 내 pc의 주소
+HOST = '172.30.1.18'
+# HOST = '192.168.0.4'    # 내 pc의 주소
 # HOST = '172.30.1.39'
 # HOST = '192.168.0.36' # 태석pc
-
 PORT = 5000
 counter = 0
+# 파일 경로
+# filename = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname
+FILEPATH = "C:/Users/hongj/LockStop/python/image/"
 
 def show_image(data, frame_name):
     # byte 배열을 numpy로 변환
@@ -40,9 +43,7 @@ def receiver(client, addr):
         if save == 1:
             now = datetime.datetime.now()
             fname = now.strftime("%y%m%d%H%M%S") + ".jpeg"
-            # 파일 경로
-            filename = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname
-            # filename = "C:/Users/hongj/LockStop/python/image/"+fname
+            filename = FILEPATH+fname
             cv2.imwrite(filename, image)
 
         # result = json.dumps({'result':'ok'})
@@ -52,5 +53,8 @@ def receiver(client, addr):
     print('exit receiver')
 
 if __name__=='__main__':
+    if not os.path.exists(FILEPATH):
+        os.makedirs(FILEPATH)
+        print('make directory')
     print('start server...')
     net.server(HOST, PORT, receiver)

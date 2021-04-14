@@ -46,6 +46,7 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnAlarm.setOnClickListener{
+            Toast.makeText(application, "경보음이 울립니다.", Toast.LENGTH_LONG).show()
             PiApi.controlBuzzer("1", "on") {
 //                if(it.result == "OK") {
 //                    Toast.makeText(application, "경보음이 울립니다.", Toast.LENGTH_LONG).show()

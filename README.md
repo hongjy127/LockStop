@@ -15,6 +15,10 @@ $ python manage.py runserver 0.0.0.0:8000
 
 ```
 $ python noti_test_pub.py
+
+// 도어락
+$ sudo pigpiod
+$ python keypad.py
 ```
 
 - usbcamera_client.py
