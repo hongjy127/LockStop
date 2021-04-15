@@ -55,7 +55,13 @@ $ python usbcamera_client.py
 $ python usbcamera_server.py
 ```
 
+- pc DB 설정
 
+  - IP_ADDRESS = "Pc주소"
+
+    db = MySQLdb.connect(host="Pc주소", db="lockstop",user ="root권장",
+
+    ​           passwd="비밀번호",charset="utf8")
 
 
 
