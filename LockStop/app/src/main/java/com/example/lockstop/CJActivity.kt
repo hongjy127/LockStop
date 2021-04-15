@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.mylib.Notification
 import com.example.mylib.net.Mqtt
 import com.example.mylib.openapi.piapi.PiApi
 import kotlinx.android.synthetic.main.activity_c_j.*
@@ -73,6 +74,6 @@ class CJActivity : AppCompatActivity() {
     }
     fun onReceived(topic: String, message: MqttMessage) {
         var msg = String(message.payload)
-        txtWight.text = "$msg"
+        txtWight.text = "택배 무게: $msg kg"
     }
 }
