@@ -12,24 +12,27 @@ int analog_val;
 int res_old;
 int res_new;
 int change;
+int change_value = 10;
 
 void check() {
     res_new = analogRead(var_pin);
     com.print_i(0, "old: ", res_old, "new: ", res_new, true);
     change = res_new-res_old;
     com.print_i(0, "change: ", change);
-    if(change > 10) {
-        com.publish("test/resister", "Increase");
-        com.print(0, "publish: Increase", true);
-    } else if (change < -10) {
-        com.publish("test/resister", "Decrease");
-        com.print(0, "publish: Decrease", true);
+    if(change > change_value) {
+        com.publish("iot/CJ", "full");
+        com.print(0, "publish: full", true);
+    } else if (change < -change_value) {
+        com.publish("iot/CJ", "empty");
+        com.print(0, "publish: empty", true);
     }
+    char buf[128];
+    sprintf(buf, "%d", res_new);
+    com.publish("iot/loadcell", buf);
+    com.print_i(0, "loadcell: ", res_new);
 
     res_old = res_new;
     com.print(0, "---------", true);
-    // com.print_i(0, "D_value: ", digital_val, true);
-    // com.print_d(1, "Voltage: ", res, true);
 }
 
 void subscribe(char* topic, uint8_t* payload, unsigned int length) {
