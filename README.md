@@ -2,6 +2,23 @@
 
 
 
+## IP 주소
+
+- PC
+  - usbcamera_server.py > HOST(pc주소), FILEPATH
+- Android
+  - MainActivity.kt > SERVER_URI(pc주소)
+  - MainActivity.kt > doorLockView.loadUrl(pi주소)
+  - PiApiService.kt > BASE_URL(pi주소)
+- raspberrypi
+  - mjpeg/iot/mysite/settings.py > ALLOWED_HOSTS
+  - (임시) keypad_client.py > IP_ADDRESS(pc주소)
+  - (임시) noti_test_pub.py > IP_ADDRESS(pc주소)
+
+
+
+
+
 ## Raspberrypi
 
 - 서버 실행
