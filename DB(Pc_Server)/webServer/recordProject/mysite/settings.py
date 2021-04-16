@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+$aaz5r&^u3@c9^msoaodfq#$s3da*4+w$=!a=abm7nbymr0(r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","172.30.1.42","172.30.1.69"]
+ALLOWED_HOSTS = ["localhost","172.30.1.39","172.30.1.57"]
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lockstop',  # 데이터베이스명
-        'HOST': '172.30.1.69',    # 서버 IP
+        'HOST': 'localhost',    # 서버 IP
         'PORT': '3306',         #포트 번호
         'USER': 'Lockstop',      # 사용자 ID
         'PASSWORD': '1234'    # 비밀번호
