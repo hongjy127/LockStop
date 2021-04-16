@@ -55,7 +55,9 @@ $ python usbcamera_client.py
 $ python usbcamera_server.py
 ```
 
-- pc DB 설정
+- (임시) arduino 가변저항 연결 -> 로드셀로 변경
+
+-  pc DB 설정
 
   - IP_ADDRESS = "Pc주소"
 
