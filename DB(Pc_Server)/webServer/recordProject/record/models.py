@@ -2,16 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class Lock(models.Model):
-
+class Lockdata(models.Model):
+    
+    topic = models.CharField(max_length=50, null=True)
+    value = models.CharField(max_length=50, null=True)
+    date = models.DateField(auto_now_add=True,null=True)
+    time = models.TimeField(auto_now=True, null=True)
+    image = models.BinaryField(null=True)
 
     class Meta:
-        managed = False
-        db_table = 'lockdata'
-
-        def __str__(self):
-            return self.title
-
-        def get_absolute_url(self): # 현재 데이터의 절대 경로 추출
-            #return reverse('blog:detail', args=(self.slug,))
-            return reverse('blog:detail', args=(self.id,))
+        db_table = "lockdata"
