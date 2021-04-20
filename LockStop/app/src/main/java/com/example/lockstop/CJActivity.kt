@@ -74,6 +74,6 @@ class CJActivity : AppCompatActivity() {
     }
     fun onReceived(topic: String, message: MqttMessage) {
         var msg = String(message.payload)
-        txtWight.text = "택배 무게: $msg kg"
+        txtWeight.text = "택배 무게: $msg kg"
     }
 }

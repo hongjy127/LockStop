@@ -1,8 +1,10 @@
 #include <MqttCom.h>
 
-const char *ssid = "KT_GiGA_2G_Wave2_05BE";
-const char *password = "hf52ch1863";
-const char *server = "172.30.1.39";
+// const char *ssid = "KT_GiGA_2G_Wave2_05BE";
+// const char *password = "hf52ch1863";
+const char *ssid = "TECH2_2G";
+const char *password = "tech21234!";
+const char *server = "172.30.1.114";
 const char *sub_topic = "test/led"; // 아두이노는 토픽 하나만 지정 가능, #, + 지원 안됨
 
 MqttCom com(ssid, password);

@@ -12,8 +12,8 @@ import org.jetbrains.anko.startActivity
 
 const val SUB_TOPIC = "iot/#"
 // 주소
-//const val SERVER_URI = "tcp://172.30.1.18:1883"  // 정연PC
-const val SERVER_URI = "tcp://172.30.1.39:1883"  // 정연PC
+//const val SERVER_URI = "tcp://192.168.138.162:1883"  // 정연PC
+const val SERVER_URI = "tcp://172.30.1.87:1883"  // 정연PC
 // const val SERVER_URI = "tcp://192.168.0.4:1883"  // 해준PC
 // const val SERVER_URI = "tcp://192.168.0.36:1883"  // 태석PC
 // const val SERVER_URI = "tcp://172.30.1.43:1883"  // 현수PC

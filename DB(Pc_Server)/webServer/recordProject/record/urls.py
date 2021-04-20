@@ -1,9 +1,10 @@
-from record.views import RecordView, ConfigView
+from record.views import TestLV, TestDV
 from django.contrib import admin
 from django.urls import path
 # from mjpeg.views import *
 
 urlpatterns = [
-    path('', RecordView.as_view(), name='record'),
-    path('image/',ConfigView.as_view(), name='imageconfig'),
+    path('', TestLV.as_view(), name='record'),
+    path('image/<int:pk>',TestDV.as_view(), name='detail'),
+
 ]

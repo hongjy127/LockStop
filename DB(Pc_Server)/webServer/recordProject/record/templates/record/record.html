@@ -1,32 +1,19 @@
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content ="width-device-width, initial-scale=1">
     <title>서버데이터</title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
-{% block title %}게시판{% endblock %}
+{% block title %}<center><h1>서버기록</h1></center>{% endblock %}
 
 {% block content %}
-<style>
-    h1{
-        position:relative;
-        margin-top:20px;
-    }
-
-    .table{
-        position:relative;
-        
-    }
-    .card{
-        position: relative;
-        margin-left:30px;
-    }
-</style>
-
+<center>
 <div class="card">
 
 <br>
 <table class="table table-striped table-hover">
+    
     <thead>
         <tr>
             <th>topic</th>
@@ -34,24 +21,29 @@
             <th>date</th>
             <th>time</th>
             <th>image</th>
+            
         </tr>
     </thead>
     <tbody>
-        {%for object in lockdata%}
+        {% for object in object_list %}
         <tr>
-            <td>{{lockdata.topic}}</a></td>
-            <td>{{lockdata.value}}</td>
-            <td>{{lockdata.date}}</td>
-            <td>{{lockdata.time}}</td>
-            <td><a href="{{lockdata.get_absolute_url}}"></a>{{lockdata.image}}</td>
+            <td>{{object.topic}}</a></td>
+            <td>{{object.value}}</td>
+            <td>{{object.date}}</td>
+            <td>{{object.time}}</td>
+            <td>
+            <a href ="{% url 'detail' object.id %}">
+                캡쳐 확인
+            </a>
+            </td>
+            
         </tr>
         {% endfor %}
     </tbody>
+   
+
 </table>
-
-
-    {% include "pagination.html" %}
-
 </div>
+</center>
 
 {% endblock %}

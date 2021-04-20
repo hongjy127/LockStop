@@ -69,4 +69,4 @@ $ python usbcamera_server.py
 
 ## Android
 
-- 앱실행
+- arduino\pub_loadcell\mag\app.ino 실행
