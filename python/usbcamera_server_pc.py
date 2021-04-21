@@ -7,7 +7,7 @@ import sys
 
 # 주소
 # HOST = '192.168.0.4'    # 내 pc의 주소
-HOST = '172.30.1.67'
+HOST = '172.30.1.87'
 # HOST = '172.30.1.39'
 # HOST = '192.168.0.36' # 태석pc
 
@@ -42,7 +42,7 @@ def receiver(client, addr):
         now = datetime.datetime.now()
         fname = now.strftime("%y%m%d%H%M%S") + ".jpeg"
         # 파일 경로
-        filename = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname
+        filename = "C:/Users/hongj/LockStop/python/image/"+fname
         # filename = "C:/Users/hongj/LockStop/python/image/"+fname
         cv2.imwrite(filename, image)
 

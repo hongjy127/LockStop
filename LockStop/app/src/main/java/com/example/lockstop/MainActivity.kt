@@ -55,20 +55,18 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        doorLockView.apply {
-            settings.javaScriptEnabled = true
-            webViewClient = WebViewClient()
+        btnSt.setOnClickListener {
+            startActivity<StreamingActivity>(
+            )
         }
 
-        // 주소
-        doorLockView.loadUrl("http://172.30.1.57:8000/mjpeg/?mode=stream")
-//        doorLockView.loadUrl("http://172.30.1.42:8000/mjpeg/?mode=stream")
+        btnLog.setOnClickListener {
+            startActivity<LogActivity>(
+            )
+        }
+
     }
 
-    override fun onPause() {
-        super.onPause()
-        doorLockView.loadUrl("about:blank")
-    }
     fun onReceived(topic: String, message: MqttMessage) {
         var msg = String(message.payload)
 
@@ -87,12 +85,10 @@ class MainActivity : AppCompatActivity() {
                     "open" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "Alarm", "문열림",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    "error" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
+                    "error3" -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
                             "Alarm", "비밀번호 3회 오류",
                             R.drawable.ic_launcher_foreground, pendingIntent)
-                    else -> noti.notifyBasic(CHANNEL_ID1, NOTIFICATION_ID1,
-                            "error", "error",
-                            R.drawable.ic_launcher_foreground, pendingIntent)
+                    
                 }
             }
             "iot/CJ" -> {
@@ -108,9 +104,6 @@ class MainActivity : AppCompatActivity() {
                             R.drawable.ic_launcher_foreground, pendingIntent)
                     "empty" -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
                             "Alarm", "택배 수거",
-                            R.drawable.ic_launcher_foreground, pendingIntent)
-                    else -> noti.notifyBasic(CHANNEL_ID2, NOTIFICATION_ID2,
-                            "error", "error",
                             R.drawable.ic_launcher_foreground, pendingIntent)
                 }
 
