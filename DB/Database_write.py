@@ -6,7 +6,6 @@ import sqlite3
 import MySQLdb
 import datetime
 
-
 client = mqtt.Client()
 IP_ADDRESS_PC = "172.30.1.87"  # pc의 주소
 IP_ADDRESS_PI = "172.30.1.93"  # raspberrypi 주소
