@@ -57,7 +57,7 @@ $ python usbcamera_server.py
 
 - arduino\pub_loadcell\mag\app.ino 실행
 
--  pc DB 설정
+-  pc DB 설정!
 
   - IP_ADDRESS = "Pc주소"
 
