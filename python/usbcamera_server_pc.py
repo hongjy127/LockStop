@@ -3,18 +3,16 @@ import json
 import cv2
 import numpy as np
 import datetime
-import os
+import sys
 
 # 주소
-# HOST = '172.30.1.18'
 # HOST = '192.168.0.4'    # 내 pc의 주소
-HOST = '172.30.1.39'
+HOST = '172.30.1.67'
+# HOST = '172.30.1.39'
 # HOST = '192.168.0.36' # 태석pc
+
 PORT = 5000
 counter = 0
-# 파일 경로
-# filename = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname
-FILEPATH = "C:/Users/hongj/LockStop/python/image/"
 
 def show_image(data, frame_name):
     # byte 배열을 numpy로 변환
@@ -29,22 +27,24 @@ def receiver(client, addr):
     frame_name = f'frame {counter}'
 
     reader = client.makefile('rb')
-    writer = client.makefile('wb')
+    # writer = client.makefile('wb')
 
-    while True:
-        data, data_len, save = net.receive(reader)
-        if not data:
-            break
-        # data : jpeg 이미지
-        # image : bgr 이미지
-        image, key = show_image(data, frame_name)
-        # AI 알고리즘 처리
-        
-        if save == 1:
-            now = datetime.datetime.now()
-            fname = now.strftime("%y%m%d%H%M%S") + ".jpeg"
-            filename = FILEPATH+fname
-            cv2.imwrite(filename, image)
+
+    data, data_len, save = net.receive(reader)
+    print('-------수신 ', data_len)        
+    if not data_len : return
+    # data : jpeg 이미지
+    # image : bgr 이미지
+    image, key = show_image(data, frame_name)
+    # AI 알고리즘 처리
+    
+    if save == 1:
+        now = datetime.datetime.now()
+        fname = now.strftime("%y%m%d%H%M%S") + ".jpeg"
+        # 파일 경로
+        filename = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname
+        # filename = "C:/Users/hongj/LockStop/python/image/"+fname
+        cv2.imwrite(filename, image)
 
         # result = json.dumps({'result':'ok'})
         # net.send(writer, result.encode())
@@ -53,8 +53,5 @@ def receiver(client, addr):
     print('exit receiver')
 
 if __name__=='__main__':
-    if not os.path.exists(FILEPATH):
-        os.makedirs(FILEPATH)
-        print('make directory')
     print('start server...')
     net.server(HOST, PORT, receiver)

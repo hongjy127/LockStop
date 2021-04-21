@@ -55,7 +55,7 @@ $ python usbcamera_client.py
 $ python usbcamera_server.py
 ```
 
-- (임시) arduino 가변저항 연결 -> 로드셀로 변경
+- arduino\pub_loadcell\mag\app.ino 실행
 
 -  pc DB 설정
 
@@ -69,4 +69,4 @@ $ python usbcamera_server.py
 
 ## Android
 
-- arduino\pub_loadcell\mag\app.ino 실행
+- 

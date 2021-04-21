@@ -21,6 +21,8 @@ def send(writer ,data, save=0):
 
 def receive(reader):
     data_len = reader.read(struct.calcsize('<L'))
+    if not data_len: return None, None, None
+    print('data len', data_len)
     data_len = struct.unpack('<L', data_len)[0]
     save = reader.read(struct.calcsize('<L'))
     save = struct.unpack('<L', save)[0]
@@ -30,5 +32,3 @@ def receive(reader):
     data = reader.read(data_len)
 
     return (data, data_len, save)
-
-        
