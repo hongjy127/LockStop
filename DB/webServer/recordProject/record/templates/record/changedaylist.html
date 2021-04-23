@@ -22,33 +22,15 @@
     a:active {
     color : black;
     }
-    h1{
-        position:relative;
-        padding: 30px;
-        margin:0px;
-        color:black;
-    }
-
-    .table{
-        position:relative;
-        padding: 30px;
-        margin:0px;
-        color:black;
-        
-    }
-    .card{
-        position: relative;
-        
-        padding: 30px;
-        margin:0px;
-        color:black;
-    }
 
 </style>
 
 <div class="card">
 <br>
+
+
 <center>
+<p> 감시서버</p>
 <table class="table table-striped table-hover">
     
     <thead>
@@ -61,14 +43,16 @@
         </tr>
     </thead>
     <tbody>
-        {% for object in object_list %}
+        {% for Lockdata in object_list %}
         <tr>
-            <td>{{object.topic}}</a></td>
-            <td>{{object.value}}</td>
-            <td>{{object.date}}</td>
-            <td>{{object.time}}</td>
+            <!-- <td><li>{{ Lockdata.date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
+                <a href="{{ Lockdata.get_absolute_url }}"></a></li></td> -->
+            <td>{{Lockdata.topic}}</td>                    
+            <td>{{Lockdata.value}}</td>
+            <td>{{Lockdata.date}}</td>
+            <td>{{Lockdata.time}}</td>
             <td>
-            <a href ="{% url 'detail' object.id %}">
+            <a href ="{% url 'detail' Lockdata.id %}">
                 캡쳐
             </a>
             </td>
@@ -78,16 +62,17 @@
         {% endfor %}
     </tbody>  
 </table>
+    <a href ="{% url 'record' %}">
+        홈으로
+    </a>
 
-    <a href ="{% url 'doorlock' %}">
-        도어락
+    <a href ="{% url 'change_day' previous_day.year previous_day.month previous_day.day %}">
+        이전데이터있는날
     </a>
-    <a href ="{% url 'CJ' %}">
-        택배함
+    <a href ="{% url 'change_day' next_day.year next_day.month next_day.day %}">
+        이후데이터있는날
     </a>
-    <a href ="{% url 'today' %}">
-        오늘
-    </a>
+
 
     {% include "record/pagination.html" %}
 
