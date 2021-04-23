@@ -1,21 +1,21 @@
-{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content ="width-device-width, initial-scale=1">
     <title>서버기록</title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
+{% extends "record/base.html" %}
+
 {% block content%}
 
-
-<a href ="{% url 'record' %}">
+<a href ="{% url 'record' %}" style="color:white">
     홈으로
 </a>
 <br>
 <br>
 <br>
 
-<img src = "/media/{{imgdata}}" alt="캡쳐사진" bodrder ="0" width="200" height="200"/>
+<img src = "/media/{{imgdata}}" alt="캡쳐사진" bodrder ="0" width="300" height="300" style="color:white"/>
 
 
 

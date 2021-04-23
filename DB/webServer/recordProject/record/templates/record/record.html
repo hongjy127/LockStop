@@ -43,13 +43,20 @@
         margin:0px;
         color:black;
     }
+    .card{
+        position: relative;
+        background-color: black;
+        padding: 30px;
+        margin:0px;
+        color:black;
+    }
 
 </style>
 
 <div class="card">
 <br>
 <center>
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" style="color:white">
     
     <thead>
         <tr>
@@ -68,7 +75,7 @@
             <td>{{object.date}}</td>
             <td>{{object.time}}</td>
             <td>
-            <a href ="{% url 'detail' object.id %}">
+            <a href ="{% url 'detail' object.id %}" style="color:white">
                 캡쳐
             </a>
             </td>
@@ -79,18 +86,17 @@
     </tbody>  
 </table>
 
-    <a href ="{% url 'doorlock' %}">
+    <a href ="{% url 'doorlock' %}" style="color:white">
         도어락
     </a>
-    <a href ="{% url 'CJ' %}">
+    <a href ="{% url 'CJ' %}" style="color:white">
         택배함
     </a>
-    <a href ="{% url 'today' %}">
+    <a href ="{% url 'today' %}" style="color:white">
         오늘
     </a>
 
-    {% include "record/pagination.html" %}
-
+{% include "record/pagination.html" %}
 </div>
 </center>
 

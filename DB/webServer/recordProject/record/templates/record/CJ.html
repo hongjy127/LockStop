@@ -22,13 +22,20 @@
     a:active {
     color : black;
     }
+    .card{
+        position: relative;
+        background-color: black;
+        padding: 30px;
+        margin:0px;
+        color:black;
+    }
 
 </style>
 
 <div class="card">
 <br>
 <center>
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" style="color:white">
     
     <thead>
         <tr>
@@ -47,7 +54,7 @@
             <td>{{object.date}}</td>
             <td>{{object.time}}</td>
             <td>
-            <a href ="{% url 'detail' object.id %}">
+            <a href ="{% url 'detail' object.id %}" style="color:white">
                 캡쳐
             </a>
             </td>
@@ -57,10 +64,10 @@
         {% endfor %}
     </tbody>  
 </table>
-    <a href ="{% url 'record' %}">
+    <a href ="{% url 'record' %}" style="color:white">
         전체
     </a>
-    <a href ="{% url 'doorlock' %}">
+    <a href ="{% url 'doorlock' %}" style="color:white">
         도어락
     </a>
 

@@ -27,3 +27,6 @@ class Lockdata(models.Model):
 
     def get_next(self):
         return self.get_next_by_mod_date()
+
+    def no_has_next(self):
+        return reverse('record/todaylist.html')
