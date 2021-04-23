@@ -34,13 +34,18 @@
 //This library can be obtained here http://librarymanager/All#Avia_HX711
 #include "HX711.h" 
  
-const int LOADCELL_DOUT_PIN = D2;
-const int LOADCELL_SCK_PIN = D1;
+const int LOADCELL_DOUT_PIN_1 = D3;
+const int LOADCELL_SCK_PIN_1 = D4;
+const int LOADCELL_DOUT_PIN_2 = D5;
+const int LOADCELL_SCK_PIN_2 = D6;
  
-HX711 scale;
+HX711 scale_1, scale_2;
  
 //-7050 worked for my 440lb max scale setup
-float calibration_factor = -200000;
+float calibration_factor_1 = -41000.00;
+float calibration_factor_2 = -120000.00;
+float zero_factor_1;
+float zero_factor_2;
  
 void setup() 
 {
@@ -48,33 +53,46 @@ void setup()
   Serial.println("HX711 calibration sketch");
   Serial.println("Remove all weight from scale");
   Serial.println("After readings begin, place known weight on scale");
-  Serial.println("Press + or a to increase calibration factor");
-  Serial.println("Press - or z to decrease calibration factor");
+//  Serial.println("Press + or a to increase calibration factor");
+//  Serial.println("Press - or z to decrease calibration factor");
  
-  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-  scale.set_scale();
+  scale_1.begin(LOADCELL_DOUT_PIN_1, LOADCELL_SCK_PIN_1, 32);
+  scale_2.begin(LOADCELL_DOUT_PIN_2, LOADCELL_SCK_PIN_2, 32);
+  scale_1.set_scale(calibration_factor_1);
+  scale_2.set_scale(calibration_factor_2);
   //Reset the scale to 0
-  scale.tare();
+  scale_1.tare();
+  scale_2.tare();
  
   //Get a baseline reading
-  long zero_factor = scale.read_average(); 
+  zero_factor_1 = scale_1.get_units(10); 
+  zero_factor_2 = scale_2.get_units(10); 
   //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
-  Serial.print("Zero factor: ");
-  Serial.println(zero_factor);
+  Serial.print("Zero factor_1: ");
+  Serial.println(zero_factor_1, 3);
+  Serial.print("Zero factor_2: ");
+  Serial.println(zero_factor_2, 3);
 }
  
 void loop() 
 {
   //Adjust to this calibration factor
-  scale.set_scale(calibration_factor);
+  scale_1.set_scale(calibration_factor_1);
+  scale_2.set_scale(calibration_factor_2);
  
-  Serial.print("Reading: ");
-  Serial.print(scale.get_units(), 5);
+  Serial.print("Reading1: ");
+  Serial.print(scale_1.get_units(), 3);
   //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
   //기존 예제가 파운드(lbs) 기준이지만 우리는 킬로그램(kg)을 쓸것이므로 'kg'로 바꿉시다.
   Serial.print(" kg"); 
   Serial.print(" calibration_factor: ");
-  Serial.print(calibration_factor);
+  Serial.print(calibration_factor_1);
+  Serial.println();
+  Serial.print("Reading2: ");
+  Serial.print(scale_2.get_units(), 3);
+  Serial.print(" kg"); 
+  Serial.print(" calibration_factor: ");
+  Serial.print(calibration_factor_2);
   Serial.println();
  
   if(Serial.available())
@@ -85,31 +103,58 @@ void loop()
     switch(temp)
     {
       case '1':
-        calibration_factor += 10;
+        calibration_factor_1 += 10;
         break;
       case '2':
-        calibration_factor += 50;
+        calibration_factor_1 += 50;
         break;
       case '3':
-        calibration_factor += 100;
+        calibration_factor_1 += 100;
         break;
       case '4':
-        calibration_factor += 1000;
+        calibration_factor_1 += 1000;
         break;
  
+      case 'q':
+        calibration_factor_1 -= 10;
+        break;
+      case 'w':
+        calibration_factor_1 -= 50;
+        break;
+      case 'e':
+        calibration_factor_1 -= 100;
+        break;
+      case 'r':
+        calibration_factor_1 -= 1000;
+        break;
+
       case 'a':
-        calibration_factor -= 10;
+        calibration_factor_2 += 10;
         break;
       case 's':
-        calibration_factor -= 50;
+        calibration_factor_2 += 50;
         break;
       case 'd':
-        calibration_factor -= 100;
+        calibration_factor_2 += 100;
         break;
       case 'f':
-        calibration_factor -= 1000;
+        calibration_factor_2 += 1000;
+        break;
+ 
+      case 'z':
+        calibration_factor_2 -= 10;
+        break;
+      case 'x':
+        calibration_factor_2 -= 50;
+        break;
+      case 'c':
+        calibration_factor_2 -= 100;
+        break;
+      case 'v':
+        calibration_factor_2 -= 1000;
         break;
     }
   }
+  delay(500);
   
 }

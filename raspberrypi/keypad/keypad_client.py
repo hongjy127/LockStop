@@ -156,10 +156,10 @@ if __name__ == '__main__':
                     bz.beep(2, n=1)
                     counter += 1
                     door = ""
-                    # publish("iot/doorlock", "error1") # <-하이디에서 받는거
+                    publish("iot/doorlock", "error") # <-하이디에서 받는거
                     if (counter == 3):
                         counter = 0
-                        publish("iot/doorlock", "error")  # <- 안드로이드 알림 받는거
+                        publish("iot/doorlock", "error3")  # <- 안드로이드 알림 받는거
                 time.sleep(0.3)
                 confirm = ""
                 b_press = False

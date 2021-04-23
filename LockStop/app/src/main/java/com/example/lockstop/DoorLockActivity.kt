@@ -28,7 +28,7 @@ class DoorLockActivity : AppCompatActivity() {
 
         when(msg) {
             "open" -> txtDoor.text = "문열림"
-            "error" -> txtDoor.text = "비밀번호 3회 오류"
+            "error3" -> txtDoor.text = "비밀번호 3회 오류"
         }
 
         btnHome.setOnClickListener {

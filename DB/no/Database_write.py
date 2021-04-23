@@ -1,14 +1,11 @@
-from time import sleep
-import time
 import paho.mqtt.client as mqtt
 from mqtt_sub import subscribe
-import sqlite3
 import MySQLdb
 import datetime
 
 client = mqtt.Client()
 IP_ADDRESS_PC = "172.30.1.87"  # pc의 주소
-IP_ADDRESS_PI = "172.30.1.93"  # raspberrypi 주소
+IP_ADDRESS_PI = "172.30.1.15"  # raspberrypi 주소
 
 db = MySQLdb.connect(host=IP_ADDRESS_PC, db="lockstop",user ="Lockstop",
                      passwd="1234",charset="utf8")

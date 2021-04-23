@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        btnDoor.setOnClickListener {
+        btnImgDoor.setOnClickListener {
             startActivity<DoorLockActivity>(
             )
         }
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        btnSt.setOnClickListener {
+        btnImgSt.setOnClickListener {
             startActivity<StreamingActivity>(
             )
         }

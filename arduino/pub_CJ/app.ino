@@ -1,8 +1,8 @@
 #include <MqttCom.h>
 #include "HX711.h"
 
-#define calibration_factor_1 -410000.0
-#define calibration_factor_2 -410000.0
+#define calibration_factor_1 -41000.0
+#define calibration_factor_2 -120000.0
 
 #define LOADCELL_DOUT_PIN_1 D3
 #define LOADCELL_SCK_PIN_1 D4
@@ -31,11 +31,14 @@ double weight_new_1;
 double weight_new_2;
 double weight_new;
 double change;
-double change_value = 0.07;
+double change_value = 0.2;
+int count_open = 0;
+int count_close = 0;
+int times = 5;
 
 void check() {
-    weight_new_1 = scale_1.get_units();
-    weight_new_2 = scale_2.get_units();
+    weight_new_1 = scale_1.get_units(times);
+    weight_new_2 = scale_2.get_units(times);
     weight_new = weight_new_1 + weight_new_2;
 
     char buf[128];
@@ -45,7 +48,13 @@ void check() {
     
     int mag = digitalRead(MAG_PIN);
     if (mag == 1) {
-        com.print(0, "door open", true);
+        // mosquitto_sub -v -h localhost -t iot/magnetic
+        if (count_open == 0) {
+            count_close = 0;
+            com.print(0, "door open", true);
+            com.publish("iot/magnetic", "open");
+            count_open++;
+        }
         com.print_d(0, "old: ", weight_old, "new: ", weight_new, true);
         change = weight_new - weight_old;
         // com.print_d(0, "change: ", change, true);
@@ -58,6 +67,13 @@ void check() {
         }
 
         // 라즈베리 파이로 사진찍으라고 보내
+    } else {
+        if (count_close == 0) {
+            count_open = 0;
+            com.print(0, "door close", true);
+            com.publish("iot/magnetic", "close");
+            count_close++;
+        }
     }
     
     weight_old = weight_new;
@@ -78,8 +94,8 @@ void setup() {
     pinMode(MAG_PIN,INPUT_PULLUP);
     com.init(server, sub_topic, subscribe);
 
-    scale_1.begin(LOADCELL_DOUT_PIN_1, LOADCELL_SCK_PIN_1);
-    scale_2.begin(LOADCELL_DOUT_PIN_2, LOADCELL_SCK_PIN_2);
+    scale_1.begin(LOADCELL_DOUT_PIN_1, LOADCELL_SCK_PIN_1, 32);
+    scale_2.begin(LOADCELL_DOUT_PIN_2, LOADCELL_SCK_PIN_2, 32);
     scale_1.set_scale(calibration_factor_1);
     scale_2.set_scale(calibration_factor_2);
     scale_1.tare();
@@ -87,8 +103,8 @@ void setup() {
     com.print(0, "zero offset", true);
 
     if (scale_1.is_ready() && scale_2.is_ready()) {
-        weight_old_1 = scale_1.get_units();
-        weight_old_2= scale_2.get_units();
+        weight_old_1 = scale_1.get_units(times);
+        weight_old_2= scale_2.get_units(times);
         weight_old = weight_old_1 + weight_old_2;
         // com.print_d(0, "weight_old: ", weight_old, true);
         // com.setInterval(3000, check);
@@ -101,7 +117,7 @@ void loop() {
     com.run();
     if (scale_1.is_ready() && scale_2.is_ready()) {
         check();
-        delay(2000);
+        // delay(2000);
     } else {
         com.print(0, "HX711 not found.", true);
     }
