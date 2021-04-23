@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LockStop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DoorLockActivity"></activity>
+        <activity android:name=".LogActivity"></activity>
+        <activity android:name=".StreamingActivity" />
+        <activity android:name=".DoorLockActivity" />
         <activity android:name=".CJActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

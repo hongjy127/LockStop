@@ -31,7 +31,7 @@ double weight_new_1;
 double weight_new_2;
 double weight_new;
 double change;
-double change_value = 0.02;
+double change_value = 0.07;
 
 void check() {
     weight_new_1 = scale_1.get_units();
