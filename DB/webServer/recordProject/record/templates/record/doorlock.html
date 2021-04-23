@@ -22,27 +22,6 @@
     a:active {
     color : black;
     }
-    h1{
-        position:relative;
-        padding: 30px;
-        margin:0px;
-        color:black;
-    }
-
-    .table{
-        position:relative;
-        padding: 30px;
-        margin:0px;
-        color:black;
-        
-    }
-    .card{
-        position: relative;
-        
-        padding: 30px;
-        margin:0px;
-        color:black;
-    }
 
 </style>
 
@@ -78,20 +57,16 @@
         {% endfor %}
     </tbody>  
 </table>
-
-    <a href ="{% url 'doorlock' %}">
-        도어락
+    <a href ="{% url 'record' %}">
+        모두확인
     </a>
     <a href ="{% url 'CJ' %}">
         택배함
     </a>
-    <a href ="{% url 'today' %}">
-        오늘
-    </a>
-
     {% include "record/pagination.html" %}
 
 </div>
 </center>
 
 {% endblock %}
+

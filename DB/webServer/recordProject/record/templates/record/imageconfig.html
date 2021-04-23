@@ -8,8 +8,14 @@
 {% block content%}
 
 
-<h1>캡쳐이미지</h1>
-<p><img src = "/media/{{imgdata}}" alt="캡쳐사진"/></p>
+<a href ="{% url 'record' %}">
+    홈으로
+</a>
+<br>
+<br>
+<br>
+
+<img src = "/media/{{imgdata}}" alt="캡쳐사진" bodrder ="0" width="200" height="200"/>
 
 
 
