@@ -29,7 +29,7 @@ DEBUG = True
 # 외부에서 허용 가능
 # 바꾸기
 # ALLOWED_HOSTS = ['hongpi', '127.0.0.1', 'localhost', '172.30.1.57']
-ALLOWED_HOSTS = ['haejunpi','127.0.0.1','localhost','192.168.0.34','192.168.0.4']
+ALLOWED_HOSTS = ['haejunpi','127.0.0.1','localhost','172.30.1.15','172.30.1.106','172.30.1.87']
 
 
 # Application definition
