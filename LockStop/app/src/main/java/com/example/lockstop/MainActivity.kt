@@ -45,8 +45,18 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        btnImgDoor.setOnClickListener {
+        imgbtnDoor.setOnClickListener {
             startActivity<DoorLockActivity>(
+            )
+        }
+
+        btnDoor.setOnClickListener {
+            startActivity<DoorLockActivity>(
+            )
+        }
+
+        imgbtnCJ.setOnClickListener {
+            startActivity<CJActivity>(
             )
         }
 
@@ -55,8 +65,18 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        btnImgSt.setOnClickListener {
+        imgbtnSt.setOnClickListener {
             startActivity<StreamingActivity>(
+            )
+        }
+
+        btnSt.setOnClickListener {
+            startActivity<StreamingActivity>(
+            )
+        }
+
+        imgbtnLog.setOnClickListener {
+            startActivity<LogActivity>(
             )
         }
 
