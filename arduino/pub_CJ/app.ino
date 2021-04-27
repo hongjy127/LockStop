@@ -16,7 +16,7 @@ const char *ssid = "TECH2_2G";
 const char *password = "tech21234!";
 // const char *ssid = "Galaxy Z Flip7055";
 // const char *password = "0123456789";
-const char *server = "172.30.1.87";
+const char *server = "172.30.1.31";
 const char *sub_topic = "test/led"; // 아두이노는 토픽 하나만 지정 가능, #, + 지원 안됨
 
 HX711 scale_1;
@@ -31,7 +31,7 @@ double weight_new_1;
 double weight_new_2;
 double weight_new;
 double change;
-double change_value = 0.2;
+double change_value = 0.1;
 int count_open = 0;
 int count_close = 0;
 int times = 5;
