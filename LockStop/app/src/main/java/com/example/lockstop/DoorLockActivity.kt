@@ -42,7 +42,8 @@ class DoorLockActivity : AppCompatActivity() {
         }
 
         btnOK.setOnClickListener {
-            Toast.makeText(application, "확인 되었습니다.", Toast.LENGTH_LONG).show()
+            startActivity<LogActivity>(
+            )
         }
 
         btnAlarm.setOnClickListener{

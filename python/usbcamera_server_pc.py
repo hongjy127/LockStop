@@ -9,14 +9,14 @@ import threading
 
 # 주소
 # HOST = '192.168.0.4'    # 내 pc의 주소
-IP_ADDRESS_PC = '172.30.1.87'
-IP_ADDRESS_PI = "172.30.1.15"  # raspberrypi 주소
+IP_ADDRESS_PC = '172.30.1.31'
+IP_ADDRESS_PI = "172.30.1.13"  # raspberrypi 주소
 # HOST = '172.30.1.39'
 # HOST = '192.168.0.36' # 태석pc
 PORT = 5000
 
 client = mqtt.Client()
-db = MySQLdb.connect(host=IP_ADDRESS_PC, db="lockstop",user ="Lockstop",
+db = MySQLdb.connect(host=IP_ADDRESS_PC, db="django_ex_db",user ="root",
                      passwd="1234",charset="utf8")
 counter = 0
 num = 0
@@ -65,7 +65,7 @@ def receiver(client, addr):
         # 파일 경로
         fname = fname.decode()
         print(fname)
-        filepath = "C:/Users/hongj/LockStop/python/image/"+fname+".jpeg"
+        filepath = "C:/Users/wjdgo/iot_project/LockStop/python/image/"+fname+".jpeg"
         print(filepath)
         # filename = "C:/Users/hongj/LockStop/python/image/"+fname
         cv2.imwrite(filepath, image)
