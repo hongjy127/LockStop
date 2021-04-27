@@ -17,7 +17,7 @@ class LogActivity : AppCompatActivity() {
         }
 
         // 주소
-        LogView.loadUrl("http://172.30.1.87:8000/record")
+        LogView.loadUrl("http://172.30.1.31:8000/record")
     }
 
     override fun onPause() {

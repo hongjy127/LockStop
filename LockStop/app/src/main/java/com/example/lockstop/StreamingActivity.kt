@@ -16,7 +16,7 @@ class StreamingActivity : AppCompatActivity() {
         }
 
         // 주소
-        doorLockView.loadUrl("http://172.30.1.15:8000/mjpeg")
+        doorLockView.loadUrl("http://172.30.1.13:8000/mjpeg")
 //        doorLockView.loadUrl("http://172.30.1.42:8000/mjpeg/?mode=stream")
     }
     override fun onPause() {

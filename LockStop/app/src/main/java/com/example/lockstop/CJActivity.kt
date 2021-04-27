@@ -55,7 +55,8 @@ class CJActivity : AppCompatActivity() {
         }
 
         btnOK.setOnClickListener {
-            Toast.makeText(application, "확인 되었습니다.", Toast.LENGTH_LONG).show()
+            startActivity<LogActivity>(
+            )
         }
 
         btnAlarm.setOnClickListener{
@@ -66,7 +67,7 @@ class CJActivity : AppCompatActivity() {
         }
 
         btnCall.setOnClickListener{
-            var uri = Uri.parse("tel:010-0000-0000")
+            var uri = Uri.parse("tel:112")
             var intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
         }
